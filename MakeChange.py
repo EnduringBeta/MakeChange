@@ -36,16 +36,24 @@ def MakeChange(total, denomStr):
         Name = ""
         Type = denomType.Coin
 
-    print("Starting to make change for {0}...".format(total))
+    print("Starting to make change for ${0}...".format(total))
 
     Denominations = list()
     if "US Dollar" in denomStr:
-        for n in count(USDollarDenoms.length):
-            Denominations.append(Denomination(USDollarDenoms[n], 0, "Penny", denomyType.coin) # Shouldn't be like this.
+        for n in USDollarDenoms:
+            Denominations.append(Denomination(n, 0, "", denomType.Coin)) # Shouldn't be like this.
+            
 
     numMethods = 0
 
-    curChange = 
-    print({0}.format(curChange))
+# Recursion might be best? Split amount into largest few, then break down each one of those items, and so on.
+# Number of breaks... multiplied together equals ways to make change?
 
-MakeChange(1.05)
+    done = False
+    while not done:
+        print("Done for now.")
+        done = True
+
+
+# Program execution
+MakeChange(1.05, "US Dollar")
