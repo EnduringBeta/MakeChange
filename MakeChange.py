@@ -41,18 +41,45 @@ def MakeChange(total, denomStr):
     Denominations = list()
     if "US Dollar" in denomStr:
         for n in USDollarDenoms:
-            Denominations.append(Denomination(n, 0, "", denomType.Coin)) # Shouldn't be like this.
+            Denominations.append(Denomination(n, 0, "", denomType.Coin)) # Not quite right
+    
+    # TODO: Make sure Denominations are ordered smallest to biggest
             
 
     numMethods = 0
 
-# Recursion might be best? Split amount into largest few, then break down each one of those items, and so on.
-# Number of breaks... multiplied together equals ways to make change?
-
     done = False
+    remTotal = total # Remaining total
     while not done:
-        print("Done for now.")
-        done = True
+
+        findLargestFittingDenom(remTotal)
+        
+        processCoinage(remTotal)
+        
+        
+
+
+
+# Recursive function to split amounts into smaller denominations
+def splitCoinage(amount):
+    
+    foundCombos = 0
+    
+    largestDenom = 0.00
+    for d in Denominations:
+        if d.Worth > largestDenom:
+            largestDenom = d.Worth
+    
+    # Check if we have hit lowest denomination
+    if largestDenom <= Denominations[0]:
+        # If so, only one combination possible
+        return 1
+    else:
+        # If not, we can dig deeper with remainder
+        
+        # Repeat this for all lower denoms?
+        foundCombos += splitCoinage(amount-largestDenom) # " + 1"?
+        
 
 
 # Program execution
